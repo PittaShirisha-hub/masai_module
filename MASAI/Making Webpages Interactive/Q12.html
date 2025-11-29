@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation - Add Items</title>
+</head>
+<body>
+
+    <h2>DOM Manipulation Assignment</h2>
+
+    <!-- Unordered List -->
+    <ul id="itemList">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+
+    <!-- Button -->
+    <button id="addBtn">Add Item</button>
+
+    <!-- JavaScript -->
+    <script>
+        let list = document.querySelector("#itemList");
+        let button = document.getElementById("addBtn");
+
+        button.addEventListener("click", function () {
+            // Create a new li
+            let newLi = document.createElement("li");
+
+            // Count existing items to know sequence number
+            let count = list.children.length + 1;
+
+            newLi.textContent = "New Item " + count;
+
+            // Apply styles based on odd/even
+            if (count % 2 !== 0) {
+                // Odd: bold + blue
+                newLi.style.fontWeight = "bold";
+                newLi.style.color = "blue";
+            } else {
+                // Even: italic + red
+                newLi.style.fontStyle = "italic";
+                newLi.style.color = "red";
+            }
+
+            // Add li to the list
+            list.appendChild(newLi);
+        });
+    </script>
+
+</body>
+</html>

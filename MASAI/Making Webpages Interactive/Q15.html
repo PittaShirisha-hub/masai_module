@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic To-Do List</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #taskList li {
+            margin: 8px 0;
+            padding: 6px;
+            background: #f3f3f3;
+            border-radius: 5px;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Dynamic To-Do List</h2>
+
+    <!-- Input and Button -->
+    <input type="text" id="taskInput" placeholder="Enter a task">
+    <button id="addBtn">Add Task</button>
+
+    <!-- Task List -->
+    <ul id="taskList"></ul>
+
+    <script>
+        let taskInput = document.getElementById("taskInput");
+        let addButton = document.getElementById("addBtn");
+        let taskList = document.getElementById("taskList");
+
+        // Add Task Function
+        addButton.addEventListener("click", function () {
+            let taskText = taskInput.value.trim();
+
+            // Prevent adding empty tasks
+            if (taskText === "") {
+                alert("Please enter a task!");
+                return;
+            }
+
+            // Create new list item (li)
+            let li = document.createElement("li");
+            li.textContent = taskText;
+
+            // Create Complete Button
+            let completeBtn = document.createElement("button");
+            completeBtn.textContent = "Complete";
+            completeBtn.addEventListener("click", function () {
+                li.classList.toggle("completed");
+            });
+
+            // Create Delete Button
+            let deleteBtn = document.createElement("button");
+            deleteBtn.textContent = "Delete";
+            deleteBtn.addEventListener("click", function () {
+                li.remove();
+            });
+
+            // Append buttons to the li
+            li.appendChild(completeBtn);
+            li.appendChild(deleteBtn);
+
+            // Append li to the task list
+            taskList.appendChild(li);
+
+            // Clear input field
+            taskInput.value = "";
+        });
+    </script>
+
+</body>
+</html>

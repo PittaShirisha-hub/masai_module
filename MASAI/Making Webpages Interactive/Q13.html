@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive DOM Manipulation</title>
+    <style>
+        #displayBox {
+            width: 300px;
+            height: 150px;
+            padding: 20px;
+            background-color: lightgray;
+            margin-top: 20px;
+            border-radius: 8px;
+            font-size: 18px;
+        }
+
+        input, button {
+            margin: 10px 0;
+            padding: 8px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Interactive DOM Manipulation Assignment</h2>
+
+    <!-- Input for color -->
+    <input type="text" id="colorInput" placeholder="Enter a color name">
+
+    <!-- Input for text -->
+    <input type="text" id="textInput" placeholder="Enter text to update">
+
+    <br>
+
+    <!-- Buttons -->
+    <button id="bgBtn">Change Background</button>
+    <button id="textBtn">Update Text</button>
+
+    <!-- Div to Modify -->
+    <div id="displayBox">This is the initial text!</div>
+
+    <script>
+        // Selecting required DOM elements
+        let colorInput = document.getElementById("colorInput");
+        let textInput = document.getElementById("textInput");
+        let backgroundButton = document.getElementById("bgBtn");
+        let textButton = document.getElementById("textBtn");
+        let displayBox = document.getElementById("displayBox");
+
+        // Function for validating a CSS color
+        function isValidColor(color) {
+            let s = new Option().style;
+            s.color = color;
+            return s.color !== "";
+        }
+
+        // Change Background Color
+        backgroundButton.addEventListener("click", function () {
+            let colorValue = colorInput.value.trim();
+
+            if (isValidColor(colorValue)) {
+                displayBox.style.backgroundColor = colorValue;
+            } else {
+                alert("Invalid color name!");
+            }
+        });
+
+        // Update Text Content
+        textButton.addEventListener("click", function () {
+            let userText = textInput.value.trim();
+
+            if (userText === "") {
+                alert("Please enter some text!");
+            } else {
+                displayBox.textContent = userText;
+            }
+        });
+    </script>
+
+</body>
+</html>
