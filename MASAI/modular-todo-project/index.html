@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Home - Modular Todo</title>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<div id="app">
+<!-- Navbar will be injected -->
+<main class="container">
+<h1>Welcome to Modular Todo App</h1>
+<p>This small project demonstrates modular JS using ES modules, localStorage-based Signup/Login and fetch-based Todos rendering.</p>
+<div class="links">
+<a class="btn" href="signup.html">Sign up</a>
+<a class="btn" href="login.html">Log in</a>
+<a class="btn" href="todos.html">View Todos (requires login)</a>
+</div>
+</main>
+<!-- Footer will be injected -->
+</div>
+
+
+<script type="module">
+import { createNavbar } from './js/components/navbar.js';
+import { createFooter } from './js/components/footer.js';
+
+
+const app = document.getElementById('app');
+app.prepend(createNavbar());
+app.appendChild(createFooter());
+</script>
+</body>
+</html>
