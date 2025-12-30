@@ -1,35 +1,79 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useReducer } from "react";
+import StepOne from "./components/StepOne";
+import StepTwo from "./components/StepTwo";
+import StepThree from "./components/StepThree";
 
-function App() {
-  const [count, setCount] = useState(0)
+// Initial State
+const initialState = {
+  step: 1,
+  formData: {
+    name: "",
+    email: "",
+    username: "",
+    password: "",
+  },
+  isSubmitted: false,
+};
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+// Reducer Function
+function reducer(state, action) {
+  switch (action.type) {
+    case "UPDATE_FIELD":
+      return {
+        ...state,
+        formData: {
+          ...state.formData,
+          [action.field]: action.value,
+        },
+      };
+
+    case "NEXT_STEP":
+      return {
+        ...state,
+        step: state.step + 1,
+      };
+
+    case "PREVIOUS_STEP":
+      return {
+        ...state,
+        step: state.step - 1,
+      };
+
+    case "SUBMIT_FORM":
+      return {
+        ...state,
+        isSubmitted: true,
+      };
+
+    case "RESET_FORM":
+      return initialState;
+
+    default:
+      return state;
+  }
 }
 
-export default App
+function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h2>Multi-Step Registration Form</h2>
+      <p>Step {state.step} of 3</p>
+
+      {state.step === 1 && (
+        <StepOne state={state} dispatch={dispatch} />
+      )}
+
+      {state.step === 2 && (
+        <StepTwo state={state} dispatch={dispatch} />
+      )}
+
+      {state.step === 3 && (
+        <StepThree state={state} dispatch={dispatch} />
+      )}
+    </div>
+  );
+}
+
+export default App;

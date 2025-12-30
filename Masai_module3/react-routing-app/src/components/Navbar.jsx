@@ -1,22 +1,13 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-export default function Navbar() {
+function Navbar() {
   return (
-    <nav style={styles.nav}>
-      <NavLink to="/home">Home</NavLink>
-      <NavLink to="/aboutus">About Us</NavLink>
-      <NavLink to="/todos">Todos</NavLink>
+    <nav style={{ padding: "10px", background: "#eee" }}>
+      <Link to="/" style={{ marginRight: "15px" }}>Home</Link>
+      <Link to="/login" style={{ marginRight: "15px" }}>Login</Link>
+      <Link to="/todos">Todos</Link>
     </nav>
   );
 }
 
-const styles = {
-  nav: {
-    display: "flex",
-    gap: "20px",
-    padding: "15px",
-    background: "#222",
-    color: "#fff",
-  },
-};
-
+export default Navbar;
